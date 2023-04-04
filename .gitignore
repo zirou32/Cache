@@ -1,0 +1,12 @@
+# Project place file
+/Cache.rbxlx
+
+# Roblox Studio lock files
+/*.rbxlx.lock
+/*.rbxl.lock
+
+# Project files
+Packages
+wally.lock
+wally.toml
+foreman.toml

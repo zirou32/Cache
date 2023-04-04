@@ -1,0 +1,18 @@
+{
+    "name": "Cache",
+    "tree": {
+        "$className": "DataModel",
+
+        "ReplicatedStorage": {
+            "Cache": {
+                "$path": "src/Cache"
+            }
+        },
+
+        "ServerScriptService": {
+            "Server": {
+                "$path": "src/examples"
+            }
+        }
+    }
+}

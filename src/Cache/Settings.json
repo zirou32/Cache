@@ -1,0 +1,4 @@
+{
+    "MaxAttempts": 50,
+    "DelayBetweenAttempts": 0.1
+}
