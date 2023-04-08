@@ -54,6 +54,7 @@ Cache.__index = Cache
 --[[
 	creates a new instance
 ]]
+
 function Cache.new(public: boolean, identifier: any, _settings: CacheSettings?)
 	local self = setmetatable({}, Cache)
 	self._ID = identifier or Symbol(HttpService:GenerateGUID(false))
@@ -74,9 +75,7 @@ end
 ]]
 function Cache.GetPublic(identifier: any)
 	WaitForInstance(identifier)
-	if not CacheInstances[identifier] then
-		error(`{identifier} doesn't exists`, 2)
-	end
+	assert(CacheInstances[identifier], `{identifier} doesn't exists`)
 	return CacheInstances[identifier]
 end
 
@@ -85,12 +84,12 @@ end
 	@param key		any		key with which it can be accessed in the future.
 	@param data		any		information to add
 ]]
-function Cache:Insert(key: any, data: any): any
+function Cache:Insert(key: any, data: any): any | { any }
 	if self._CACHE[key] == data then
 		return self._CACHE[key]
 	end
 	self._CACHE[key] = data
-	return data
+	return self._CACHE[key]
 end
 
 --[[
@@ -100,11 +99,17 @@ end
 
 	@returns the data to be obtained
 ]]
-function Cache:Collect(key: any | nil): any
+function Cache:Collect(key: any): { any }
 	if key == nil then
 		return self._CACHE
 	end
-	return self._CACHE[key] or "none"
+	return self._CACHE[key]
+end
+
+function Cache:Remove<T>(key: T): T
+	assert(key, "You havent provided a key to delete")
+	self._CACHE[key] = nil
+	return self._CACHE[key]
 end
 
 --[[
